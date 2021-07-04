@@ -25,10 +25,13 @@ public class Canvas {
     
     private List<IShape> shapes;
 
-    private Stack<List<IShape>> undoStack;
-    private Stack<List<IShape>> redoStack;
+//    private Stack<char[][]> undoStack;
+//    private Stack<char[][]> redoStack;
+
+    private Stack<List<IShape>> undoShapes;
+    private Stack<List<IShape>> redoShapes;
     
-    public Canvas() {}
+    public Canvas() { }
     
     public Canvas(int width, int height) {
     	this.drawableWidth = width;
@@ -38,34 +41,54 @@ public class Canvas {
         canvasBoardArray = new char[this.height][this.width];
         this.shapes = new ArrayList<IShape>();
 
-        this.undoStack = new Stack<>();
-        this.redoStack = new Stack<>();
+//        this.undoStack = new Stack<>();
+//        this.redoStack = new Stack<>();
+        this.undoShapes = new Stack<>();
+        this.redoShapes = new Stack<>();
     }
     
     public boolean addShape(IShape shape) {
-        saveForUndo();     // save previous state
+        saveShapesForUndo();
         return shapes.add(shape);
     }
 
-    private void saveForUndo(){
+//    private void saveCanvasForUndo(){
+//        char[][] copy = Arrays.stream(canvasBoardArray)
+//                .map(char[]::clone)
+//                .toArray(char[][]::new);
+//        undoStack.push(copy);
+//    }
+
+//    private void saveCanvasForRedo(){
+//        char[][] copy = Arrays.stream(canvasBoardArray)
+//                .map(char[]::clone)
+//                .toArray(char[][]::new);
+//        redoStack.push(copy);
+//    }
+
+    private void saveShapesForUndo(){
         List<IShape> copyList = new ArrayList<>();
         copyList.addAll(shapes);
-        undoStack.push(copyList);
+        undoShapes.push(copyList);
+    }
+
+    private void saveShapesForRedo(){
+        List<IShape> copyList = new ArrayList<>();
+        copyList.addAll(shapes);
+        redoShapes.push(copyList);
     }
 
     public void undo(){
-        redoStack.push(shapes);
-        if(!undoStack.isEmpty()){
-            List<IShape> undoShapes = undoStack.pop();
-            shapes = undoShapes;
+        saveShapesForRedo();
+        if(!undoShapes.isEmpty()){
+            shapes = undoShapes.pop();
         }
     }
 
     public void redo(){
-        saveForUndo();          // undo the redo command
-        if(!redoStack.isEmpty()){
-            List<IShape> redoShapes = redoStack.pop();
-            shapes = redoShapes;
+        saveShapesForUndo();
+        if(!redoShapes.isEmpty()){
+            shapes = redoShapes.pop();
         }
     }
     
