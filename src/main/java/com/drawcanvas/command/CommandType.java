@@ -1,9 +1,9 @@
 package com.drawcanvas.command;
 
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import lombok.Getter;
 
 public enum CommandType {
     CREATE_CANVAS("C", 2),
@@ -11,8 +11,8 @@ public enum CommandType {
     DRAW_RECT("R", 4),
     FILL_AREA("B", 3),
     CLEAR_CANVAS("O"),
-    UNDO("U"),
-    REDO("E"),
+    UNDO_CANVAS("U"),
+    REDO_CANVAS("R"),
     HELP("H"),
     QUIT("Q");
 

@@ -40,18 +40,15 @@ public class HelpCommand extends AbstractCommand {
         builder.append("programs.");
 
         builder.append(String.format("%1$-20s", "\n5. O: "));
-        builder.append("Undo the last command.");
-
-        builder.append(String.format("%1$-20s", "\n6. O: "));
-        builder.append("Redo the undo command.");
-
-        builder.append(String.format("%1$-20s", "\n7. O: "));
         builder.append("Clear the canvas.");
+        
+        builder.append(String.format("%1$-20s", "\n6. U: "));
+        builder.append("Undo the canvas.");
 
-        builder.append(String.format("%1$-20s", "\n8. H: "));
+        builder.append(String.format("%1$-20s", "\n7. H: "));
         builder.append("Show the help menu.");
 
-        builder.append(String.format("%1$-20s", "\n9. Q "));
+        builder.append(String.format("%1$-20s", "\n8. Q "));
         builder.append("Should quit the program.\n");
     }
 

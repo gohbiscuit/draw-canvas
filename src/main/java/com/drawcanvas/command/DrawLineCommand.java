@@ -1,5 +1,7 @@
 package com.drawcanvas.command;
 
+import java.util.List;
+
 import com.drawcanvas.exception.DrawCanvasErrorCodes;
 import com.drawcanvas.exception.DrawCanvasException;
 import com.drawcanvas.graphics.IShape;
@@ -37,6 +39,9 @@ public class DrawLineCommand extends AbstractCommand {
 
 		IShape line = new Line(p1, p2);
 		canvas.addShape(line);
+		
+		this.canvas.storeShape(canvas.getShapes());
+		
 		System.out.println(canvas.render());
 		System.out.println();
 	}

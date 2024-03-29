@@ -7,6 +7,7 @@ import lombok.Getter;
 public enum DrawCanvasErrorCodes {
 
 	CANVAS_NOT_CREATED_ERROR("CANVAS_NOT_CREATED_ERROR-001", "Canvas Not Created", "Please create a new canvas."),
+	CANVAS_HAS_NO_SHAPES_ERROR("CANVAS_HAS_NO_SHAPES_ERROR-001", "Canvas Has No Shapes", "Nothing to undo."),
 	
     CREATE_CANVAS_ARGUMENTS_LENGTH_ERROR("CREATE-CANVAS-ERROR-001", "Invalid Arguments Length", "Please enter 2 arguments to create a canvas, in the following format 'C w h'."),
     CREATE_CANVAS_ARGUMENTS_TYPE_ERROR("CREATE-CANVAS-ERROR-002", "Invalid Arguments Type", "Please ensure your input is only positive numbers."),

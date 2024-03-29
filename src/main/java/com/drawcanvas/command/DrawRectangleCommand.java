@@ -33,8 +33,12 @@ public class DrawRectangleCommand extends AbstractCommand {
 			throw new DrawCanvasException(DrawCanvasErrorCodes.DRAW_RECT_OUT_OF_BOUNDARY_ERROR,
 					DrawCanvasErrorCodes.DRAW_RECT_OUT_OF_BOUNDARY_ERROR.getDescription());
 		}
+		
 		IShape rectangle = new Rectangle(p1, p2);
 		canvas.addShape(rectangle);
+		
+		this.canvas.storeShape(canvas.getShapes());
+
 		System.out.println(canvas.render());
 		System.out.println();
 	}

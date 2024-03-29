@@ -1,11 +1,12 @@
 package com.drawcanvas.graphics;
 
 import com.drawcanvas.exception.DrawCanvasException;
+
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class Canvas {
     private static final char HORIZONTAL_WALL_EDGE        = '-';
@@ -23,15 +24,13 @@ public class Canvas {
     @Getter
 	private int height;
     
+    @Getter @Setter
     private List<IShape> shapes;
-
-//    private Stack<char[][]> undoStack;
-//    private Stack<char[][]> redoStack;
-
-    private Stack<List<IShape>> undoShapes;
-    private Stack<List<IShape>> redoShapes;
     
-    public Canvas() { }
+    @Getter @Setter
+    private List<IShape> previousShape;
+    
+    public Canvas() {}
     
     public Canvas(int width, int height) {
     	this.drawableWidth = width;
@@ -40,56 +39,17 @@ public class Canvas {
         this.height = height + 2;				// include borders
         canvasBoardArray = new char[this.height][this.width];
         this.shapes = new ArrayList<IShape>();
-
-//        this.undoStack = new Stack<>();
-//        this.redoStack = new Stack<>();
-        this.undoShapes = new Stack<>();
-        this.redoShapes = new Stack<>();
+        this.previousShape = new ArrayList<IShape>();
     }
     
     public boolean addShape(IShape shape) {
-        saveShapesForUndo();
         return shapes.add(shape);
     }
-
-//    private void saveCanvasForUndo(){
-//        char[][] copy = Arrays.stream(canvasBoardArray)
-//                .map(char[]::clone)
-//                .toArray(char[][]::new);
-//        undoStack.push(copy);
-//    }
-
-//    private void saveCanvasForRedo(){
-//        char[][] copy = Arrays.stream(canvasBoardArray)
-//                .map(char[]::clone)
-//                .toArray(char[][]::new);
-//        redoStack.push(copy);
-//    }
-
-    private void saveShapesForUndo(){
-        List<IShape> copyList = new ArrayList<>();
-        copyList.addAll(shapes);
-        undoShapes.push(copyList);
-    }
-
-    private void saveShapesForRedo(){
-        List<IShape> copyList = new ArrayList<>();
-        copyList.addAll(shapes);
-        redoShapes.push(copyList);
-    }
-
-    public void undo(){
-        saveShapesForRedo();
-        if(!undoShapes.isEmpty()){
-            shapes = undoShapes.pop();
-        }
-    }
-
-    public void redo(){
-        saveShapesForUndo();
-        if(!redoShapes.isEmpty()){
-            shapes = redoShapes.pop();
-        }
+    
+    public void storeShape(List<IShape> shapes){
+    	for(IShape s : shapes) {
+    		previousShape.add(s);
+    	}
     }
     
     /**
@@ -109,7 +69,7 @@ public class Canvas {
                 }
             }
         }
-
+    	
         // append shapes
         for (IShape shape : shapes) {
             canvasBoardArray = shape.draw(canvasBoardArray);

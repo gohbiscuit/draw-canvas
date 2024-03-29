@@ -58,10 +58,16 @@ public class App
                 canvas = command.getCanvas();
                 break;
             case DRAW_LINE:
+                command = commandFactory.getCommand(selectedCommand);
+                command.setCanvas(canvas);
+                command.execute(parameters);
+                break;
             case DRAW_RECT:
+                command = commandFactory.getCommand(selectedCommand);
+                command.setCanvas(canvas);
+                command.execute(parameters);
+                break;
             case FILL_AREA:
-            case UNDO:
-            case REDO:
                 command = commandFactory.getCommand(selectedCommand);
                 command.setCanvas(canvas);
                 command.execute(parameters);
@@ -72,6 +78,18 @@ public class App
                 break;
             /* Additional Commands (clear canvas,undo and help) */
             case CLEAR_CANVAS:
+                command = commandFactory.getCommand(selectedCommand);
+                command.setCanvas(canvas);
+            	command.execute(parameters);
+            	canvas = command.getCanvas();
+                break;
+            case UNDO_CANVAS:
+                command = commandFactory.getCommand(selectedCommand);
+                command.setCanvas(canvas);
+            	command.execute(parameters);
+            	canvas = command.getCanvas();
+                break;
+            case REDO_CANVAS:
                 command = commandFactory.getCommand(selectedCommand);
                 command.setCanvas(canvas);
             	command.execute(parameters);

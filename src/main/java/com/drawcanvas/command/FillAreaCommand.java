@@ -35,8 +35,11 @@ public class FillAreaCommand extends AbstractCommand {
 			throw new DrawCanvasException(DrawCanvasErrorCodes.FILL_AREA_OUT_OF_BOUNDARY_ERROR,
 					DrawCanvasErrorCodes.FILL_AREA_OUT_OF_BOUNDARY_ERROR.getDescription());
 		}
+		this.canvas.storeShape(canvas.getShapes());
+		
 		IShape fill = new Fill(new Point(x1, y1), color, canvas.getDrawableWidth(), canvas.getDrawableHeight());
 		canvas.addShape(fill);
+
 		System.out.println(this.canvas.render());
 		System.out.println();
 	}

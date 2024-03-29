@@ -19,12 +19,12 @@ public class CommandFactory {
 		case QUIT:
 			return new QuitCommand();
 		/* Additional Commands (clear canvas and help) */
+		case UNDO_CANVAS:
+			return new UndoCommand();
+		case REDO_CANVAS:
+			return new RedoCommand();
 		case CLEAR_CANVAS:
 			return new ClearCanvasCommand();
-		case UNDO:
-			return new UndoCommand();
-		case REDO:
-			return new RedoCommand();
 		case HELP:
 			return new HelpCommand();
 		}

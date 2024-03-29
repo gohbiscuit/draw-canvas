@@ -28,8 +28,8 @@ public class Fill implements IShape {
 	 */
 	private void floodFill(char[][] canvas, int x, int y,char colorToPaint) {
 		char previousColor = canvas[y][x]; 
-		if(previousColor == colorToPaint)
-			return;
+//		if(previousColor == colorToPaint)
+//			return;
 		
         floodFillUtil(canvas, x, y, previousColor, colorToPaint); 
 	}
